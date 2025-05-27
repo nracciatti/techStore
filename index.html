@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TechStore | Tu tienda de tecnología</title>
+
+    <!-- bootstrap -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- iconos de bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
+    <!-- sweetalert2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- typeit -->
+    <script src="https://unpkg.com/typeit@8.7.1/dist/index.umd.js"></script>
+
+    <!-- icono -->
+    <link
+      rel="icon"
+      href="./assets/images/techStoreLogo.png"
+      type="Tech Store Logo"
+    />
+
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+          <a class="navbar-brand" href="#">
+            <!-- <img src="./assets/images/logoSinFondo.png" alt="TechStore Logo" /> -->
+            TechStore
+          </a>
+
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#"
+                  >Inicio</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#about">Nosotros</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#productos">Productos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#contacto">Contacto</a>
+              </li>
+            </ul>
+
+            <div class="dropdown">
+              <button
+                class="btn btn-outline-dark dropdown-toggle"
+                type="button"
+                id="carritoBtn"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="bi bi-cart"></i> Carrito
+                <span
+                  class="badge bg-dark text-white ms-1 rounded-pill"
+                  id="contador-carrito"
+                  >0</span
+                >
+              </button>
+
+              <div
+                class="dropdown-menu dropdown-menu-end p-3"
+                aria-labelledby="carritoBtn"
+                style="min-width: 300px; max-height: 400px; overflow-y: auto"
+              >
+                <div id="carrito-contenido">
+                  <p class="text-center mb-0" id="carrito-vacio">
+                    Tu carrito está vacío
+                  </p>
+                </div>
+                <hr class="dropdown-divider" />
+                <div class="d-flex justify-content-between align-items-center">
+                  <span>Total: <strong id="carrito-total">$0.00</strong></span>
+                  <button class="btn btn-success btn-sm" id="btn-checkout">
+                    Checkout
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <section
+      id="hero"
+      class="py-5 text-center text-white position-relative"
+      style="margin-top: 50px; min-height: 500px"
+    >
+      <div class="container py-5">
+        <div class="row py-5">
+          <div class="col-lg-8 mx-auto">
+            <h1 class="display-4 fw-bold" id="hero-title"></h1>
+            <p class="lead mb-4">
+              Descubre los mejores productos tecnológicos al mejor precio
+            </p>
+            <a href="#productos" class="btn btn-primary btn-lg"
+              >Ver productos</a
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto text-center">
+            <h2 class="mb-4">Sobre Nosotros</h2>
+            <p class="lead">
+              Somos una tienda especializada en productos tecnológicos de alta
+              calidad. Nuestro objetivo es ofrecer la mejor experiencia de
+              compra a nuestros clientes.
+            </p>
+            <p>
+              Fundada en 2025, hemos crecido muy rapido gracias a nuestra
+              dedicación a la excelencia y al servicio al cliente. Ofrecemos una
+              amplia gama de productos, desde smartphones y laptops hasta
+              accesorios y gadgets innovadores.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="productos" class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center mb-4 text-white">Nuestros Productos</h2>
+
+        <div class="row mb-4">
+          <div class="col-12 text-center">
+            <div id="categorias" class="btn-group" role="group">
+              <button
+                type="button"
+                class="btn btn-outline-primary"
+                onclick="cargarProductos()"
+              >
+                Todos
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="row" id="lista-productos">
+          <div class="col-12 text-center">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Cargando...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- contacto -->
+    <section id="contacto" class="py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2 class="text-center mb-4">Contacto</h2>
+            <p class="text-center mb-5">
+              ¿Tienes alguna pregunta? Completa el formulario y nos pondremos en
+              contacto contigo.
+            </p>
+
+            <!-- formulario -->
+            <form id="formulario-contacto" class="needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="nombre" class="form-label">Nombre</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="nombre"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Por favor ingresa tu nombre.
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Email</label>
+                  <input
+                    type="email"
+                    class="form-control"
+                    id="email"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Por favor ingresa un email válido.
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label for="asunto" class="form-label">Asunto</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="asunto"
+                    required
+                  />
+                  <div class="invalid-feedback">
+                    Por favor ingresa el asunto.
+                  </div>
+                </div>
+                <div class="col-12">
+                  <label for="mensaje" class="form-label">Mensaje</label>
+                  <textarea
+                    class="form-control"
+                    id="mensaje"
+                    rows="5"
+                    required
+                  ></textarea>
+                  <div class="invalid-feedback">
+                    Por favor ingresa tu mensaje.
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button class="btn btn-primary w-100" type="submit">
+                    Enviar mensaje
+                  </button>
+                </div>
+              </div>
+            </form>
+
+            <div
+              class="alert alert-success mt-3"
+              id="mensaje-exito"
+              style="display: none"
+            >
+              ¡Gracias por tu mensaje! Te contactaremos pronto.
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- footer -->
+    <footer class="py-4 bg-dark text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4 mb-3 mb-md-0">
+            <h5>TechStore</h5>
+            <p class="small">
+              Tu tienda de tecnología de confianza desde 2025.
+            </p>
+          </div>
+          <div class="col-md-4 mb-3 mb-md-0">
+            <h5>Enlaces</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Inicio</a></li>
+              <li><a href="#productos" class="text-white">Productos</a></li>
+              <li><a href="#about" class="text-white">Nosotros</a></li>
+              <li><a href="#contacto" class="text-white">Contacto</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h5>Contacto</h5>
+            <ul class="list-unstyled">
+              <li><i class="bi bi-geo-alt"></i> Av. Libertador 123, Ciudad</li>
+              <li><i class="bi bi-envelope"></i> info@techstore.com</li>
+              <li><i class="bi bi-phone"></i> (+54) 1234-5678</li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <div class="text-center">
+          <p class="small mb-0">
+            &copy; 2025 TechStore. Todos los derechos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="./js/products.js"></script>
+    <script src="./js/cart.js"></script>
+    <script src="./js/validation.js"></script>
+    <script src="./js/app.js"></script>
+  </body>
+</html>
