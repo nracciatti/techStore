@@ -15,62 +15,6 @@ function cargarProductos() {
     });
 }
 
-// // Función para cargar las categorías
-// function cargarCategorias() {
-//   fetch("https://fakestoreapi.com/products/categories")
-//     .then((response) => response.json())
-//     .then((categorias) => {
-//       const categoriasContainer = document.getElementById("categorias");
-//       if (!categoriasContainer) return;
-
-//       //mantenes el boton de todos
-//       let botonesHTML =
-//         '<button type="button" class="btn btn-outline-primary active" onclick="cargarProductos()">Todos</button>';
-
-//       categorias.forEach((categoria) => {
-//         botonesHTML += `
-//           <button type="button" class="btn btn-outline-primary" onclick="filtrarPorCategoria('${categoria}')">
-//             ${categoria.charAt(0).toUpperCase() + categoria.slice(1)}
-//           </button>
-//         `;
-//       });
-
-//       categoriasContainer.innerHTML = botonesHTML;
-//     })
-//     .catch((error) => console.error("Error al cargar categorías:", error));
-// }
-
-// Función para filtrar productos por categoría
-function filtrarPorCategoria(categoria) {
-  const productosContainer = document.getElementById("lista-productos");
-  productosContainer.innerHTML =
-    '<div class="col-12 text-center"><div class="spinner-border text-primary" role="status"><span class="visually-hidden">Cargando...</span></div></div>';
-
-  fetch(`https://fakestoreapi.com/products/category/${categoria}`)
-    .then((response) => response.json())
-    .then((productos) => {
-      mostrarProductos(productos);
-
-      // Actualizar botones activos
-      const botones = document.querySelectorAll("#categorias button");
-      botones.forEach((boton) => {
-        boton.classList.remove("active");
-        if (
-          boton.textContent.trim().toLowerCase() === categoria.toLowerCase() ||
-          (boton.textContent.trim() === "Todos" && categoria === "todos")
-        ) {
-          boton.classList.add("active");
-        }
-      });
-    })
-    .catch((error) => {
-      console.error("Error al filtrar productos:", error);
-      productosContainer.innerHTML =
-        '<div class="col-12 text-center"><p class="text-danger">Error al cargar productos. Intenta de nuevo más tarde.</p></div>';
-    });
-}
-
-// Función para mostrar los productos en el DOM
 function mostrarProductos(productos) {
   const productosContainer = document.getElementById("lista-productos");
   productosContainer.innerHTML = "";
@@ -106,5 +50,4 @@ function mostrarProductos(productos) {
   });
 }
 
-// Cargar productos al iniciar la página
 document.addEventListener("DOMContentLoaded", cargarProductos);

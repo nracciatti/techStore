@@ -6,7 +6,6 @@ document.addEventListener("DOMContentLoaded", function () {
     breakLines: false,
     waitUntilVisible: true,
     loop: false,
-    loopDelay: 3000,
     // cursor: true,
     cursorChar: "_",
     cursorSpeed: 1000,

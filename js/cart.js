@@ -39,7 +39,6 @@ function agregarAlCarrito(id, nombre, precio, imagen) {
     },
   }).then((result) => {
     if (result.isConfirmed) {
-      // Ejecutar la lógica original
       const productoExistente = carrito.find((item) => item.id === id);
 
       if (productoExistente) {
